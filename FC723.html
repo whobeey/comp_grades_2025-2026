@@ -14,12 +14,9 @@
 --text:#f8fafc;
 --muted:#cbd5e1;
 --accent:#7c3aed;
---accent2:#06b6d4;
 
 --fail:#ef4444;
---pass:#f59e0b;
---good:#22c55e;
---great:#38bdf8;
+--pass:#22c55e;
 }
 
 *{box-sizing:border-box}
@@ -72,14 +69,11 @@ h1{
 margin:0;
 font-size:clamp(2rem,4vw,3rem);
 font-weight:800;
-letter-spacing:-.03em;
 }
 
 .subtitle{
 margin-top:10px;
 color:var(--muted);
-font-size:1rem;
-line-height:1.6;
 }
 
 .grid{
@@ -105,7 +99,6 @@ gap:6px;
 }
 
 .label{
-font-size:1rem;
 font-weight:700;
 }
 
@@ -122,7 +115,6 @@ border:1px solid rgba(255,255,255,.1);
 background:rgba(255,255,255,.05);
 color:var(--text);
 font-size:1rem;
-font-weight:600;
 outline:none;
 }
 
@@ -154,8 +146,6 @@ color:var(--muted);
 
 .result-fail .result{color:var(--fail)}
 .result-pass .result{color:var(--pass)}
-.result-good .result{color:var(--good)}
-.result-great .result{color:var(--great)}
 
 </style>
 </head>
@@ -171,8 +161,8 @@ color:var(--muted);
 <h1>FC723</h1>
 
 <p class="subtitle">
-Enter your marks below.  
-Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
+Portfolio Assessments weighted <b>10%, 10%, 15%, 15%, 50%</b>.
+Passing grade: <b>65%</b>
 </p>
 
 </div>
@@ -184,7 +174,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 <div class="label">Portfolio Assessment 1</div>
 <div class="weight">10%</div>
 </div>
-<input type="number" id="g1">
+<input type="number" id="g1" min="0" max="100">
 </div>
 
 <div class="row">
@@ -192,7 +182,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 <div class="label">Portfolio Assessment 2</div>
 <div class="weight">10%</div>
 </div>
-<input type="number" id="g2">
+<input type="number" id="g2" min="0" max="100">
 </div>
 
 <div class="row">
@@ -200,7 +190,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 <div class="label">Portfolio Assessment 3</div>
 <div class="weight">15%</div>
 </div>
-<input type="number" id="g3">
+<input type="number" id="g3" min="0" max="100">
 </div>
 
 <div class="row">
@@ -208,7 +198,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 <div class="label">Portfolio Assessment 4</div>
 <div class="weight">15%</div>
 </div>
-<input type="number" id="g4">
+<input type="number" id="g4" min="0" max="100">
 </div>
 
 <div class="row">
@@ -216,7 +206,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 <div class="label">FC723 Project</div>
 <div class="weight">50%</div>
 </div>
-<input type="number" id="g5">
+<input type="number" id="g5" min="0" max="100">
 </div>
 
 </div>
@@ -225,7 +215,7 @@ Weights are fixed at <b>10%, 10%, 15%, 15%, 50%</b>.
 
 <h2 class="result" id="result">0%</h2>
 
-<div class="status" id="status">Waiting for grades...</div>
+<div class="status" id="status">Enter grades</div>
 
 </div>
 
@@ -244,11 +234,10 @@ return Math.max(0,Math.min(100,Number(v)))
 
 function getStatus(total){
 
-if(total<40)return{text:"Below pass",className:"result-fail"}
-if(total<60)return{text:"Pass",className:"result-pass"}
-if(total<70)return{text:"Good",className:"result-good"}
+if(total>=65)
+return{text:"PASS",className:"result-pass"}
 
-return{text:"Excellent",className:"result-great"}
+return{text:"FAIL",className:"result-fail"}
 
 }
 
@@ -269,7 +258,7 @@ let status=document.getElementById("status")
 
 status.textContent=state.text
 
-card.classList.remove("result-fail","result-pass","result-good","result-great")
+card.classList.remove("result-pass","result-fail")
 card.classList.add(state.className)
 
 }
