@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grade Calculator</title>
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 50px;
+}
+
+input {
+    width: 80px;
+    padding: 5px;
+    margin: 5px;
+}
+
+button {
+    padding: 8px 15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Grade Calculator</h1>
+
+<p>Enter grade and weight (%)</p>
+
+<div>
+Grade <input id="g1"> Weight <input id="w1"><br>
+Grade <input id="g2"> Weight <input id="w2"><br>
+Grade <input id="g3"> Weight <input id="w3"><br>
+Grade <input id="g4"> Weight <input id="w4"><br>
+Grade <input id="g5"> Weight <input id="w5"><br>
+</div>
+
+<br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h2 id="result"></h2>
+
+<script>
+function calculate(){
+
+let total = 0;
+
+for(let i=1;i<=5;i++){
+
+let grade = document.getElementById("g"+i).value
+let weight = document.getElementById("w"+i).value
+
+if(grade && weight){
+total += grade * (weight/100)
+}
+
+}
+
+document.getElementById("result").innerText = "Final Grade: " + total.toFixed(2)
+
+}
+</script>
+
+</body>
+</html>
