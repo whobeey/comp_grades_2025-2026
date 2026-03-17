@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC724</title>
+
+<style>
+
+:root{
+--bg1:#0b1220;
+--bg2:#111827;
+--card:rgba(255,255,255,0.08);
+--text:#f8fafc;
+--muted:#cbd5e1;
+--soft:#94a3b8;
+--accent:#7c3aed;
+--accent2:#06b6d4;
+
+--fail:#ef4444;
+--pass:#22c55e;
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+min-height:100vh;
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+color:var(--text);
+
+background:
+radial-gradient(circle at top left, rgba(124,58,237,.35), transparent 30%),
+radial-gradient(circle at top right, rgba(6,182,212,.25), transparent 30%),
+linear-gradient(135deg,var(--bg1),var(--bg2));
+
+display:flex;
+align-items:center;
+justify-content:center;
+padding:24px;
+}
+
+.card{
+width:100%;
+max-width:760px;
+background:var(--card);
+border:1px solid rgba(255,255,255,.10);
+backdrop-filter:blur(18px);
+border-radius:24px;
+padding:32px;
+box-shadow:0 24px 70px rgba(0,0,0,.35);
+}
+
+.header{
+text-align:center;
+margin-bottom:28px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
+color:var(--muted);
+font-size:.9rem;
+margin-bottom:14px;
+}
+
+h1{
+margin:0;
+font-size:clamp(2rem,4vw,3rem);
+font-weight:800;
+letter-spacing:-0.03em;
+}
+
+.subtitle{
+margin-top:10px;
+color:var(--muted);
+font-size:1rem;
+line-height:1.6;
+}
+
+.grid{
+display:grid;
+gap:16px;
+}
+
+.row{
+display:grid;
+grid-template-columns:1.4fr 1fr;
+gap:14px;
+align-items:center;
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.label-wrap{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.label{
+font-size:1rem;
+font-weight:700;
+}
+
+.weight{
+color:var(--muted);
+font-size:.92rem;
+}
+
+input[type="number"]{
+width:100%;
+padding:16px 18px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.10);
+background:rgba(255,255,255,.05);
+color:var(--text);
+font-size:1rem;
+font-weight:600;
+outline:none;
+transition:.2s ease;
+}
+
+input::placeholder{
+color:#94a3b8;
+}
+
+input:focus{
+border-color:var(--accent);
+box-shadow:0 0 0 4px rgba(124,58,237,.18);
+}
+
+.result-card{
+margin-top:24px;
+padding:24px;
+border-radius:22px;
+background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(6,182,212,.14));
+border:1px solid rgba(255,255,255,.10);
+text-align:center;
+}
+
+.result-label{
+color:var(--muted);
+font-size:.95rem;
+margin-bottom:8px;
+}
+
+.result{
+font-size:clamp(2.2rem,6vw,3.8rem);
+font-weight:900;
+margin:0;
+}
+
+.status{
+margin-top:10px;
+font-size:1rem;
+font-weight:700;
+color:var(--muted);
+}
+
+.empty-note{
+margin-top:6px;
+color:var(--soft);
+font-size:.9rem;
+}
+
+.result-fail .result{
+color:var(--fail);
+}
+
+.result-pass .result{
+color:var(--pass);
+}
+
+.copy-row{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+}
+
+.copy-btn{
+padding:8px 14px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
+color:var(--text);
+cursor:pointer;
+font-weight:600;
+font-size:.85rem;
+transition:.15s ease;
+}
+
+.copy-btn:hover{
+background:rgba(255,255,255,.12);
+}
+
+.quote{
+margin-top:24px;
+text-align:center;
+color:#9ca3af;
+font-size:.92rem;
+line-height:1.6;
+font-style:italic;
+}
+
+@media (max-width:640px){
+.row{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+<div class="header">
+
+<div class="badge">Grade Calculator</div>
+
+<h1>FC724</h1>
+
+<p class="subtitle">
+Assessments are weighted <strong>30%, 20%, 20%, 30%</strong><br>
+Passing grade: <strong>65%</strong>
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="row">
+<div class="label-wrap">
+<div class="label">Mid-Module Exam</div>
+<div class="weight">30%</div>
+</div>
+<input type="number" id="g1" min="0" max="100" placeholder="Enter grade">
+</div>
+
+<div class="row">
+<div class="label-wrap">
+<div class="label">Portfolio Assessment 1</div>
+<div class="weight">20%</div>
+</div>
+<input type="number" id="g2" min="0" max="100" placeholder="Enter grade">
+</div>
+
+<div class="row">
+<div class="label-wrap">
+<div class="label">Portfolio Assessment 2</div>
+<div class="weight">20%</div>
+</div>
+<input type="number" id="g3" min="0" max="100" placeholder="Enter grade">
+</div>
+
+<div class="row">
+<div class="label-wrap">
+<div class="label">End of Module Exam</div>
+<div class="weight">30%</div>
+</div>
+<input type="number" id="g4" min="0" max="100" placeholder="Enter grade">
+</div>
+
+</div>
+
+<section class="result-card" id="resultCard">
+
+<div class="result-label">Final Weighted Grade</div>
+
+<div class="copy-row">
+<h2 class="result" id="result">—</h2>
+<button class="copy-btn" id="copyBtn" onclick="copyGrade()">Copy</button>
+</div>
+
+<div class="status" id="status">Ready when you are...</div>
+
+<div class="empty-note" id="note">Enter your grades to see your result.</div>
+
+</section>
+
+<div class="quote">
+“Never regard study as a duty but as an enviable opportunity to learn” — Albert Einstein
+</div>
+
+</main>
+
+<script>
+
+const weights=[30,20,20,30]
+const inputs=["g1","g2","g3","g4"]
+
+function getGrade(id){
+
+let v=document.getElementById(id).value
+
+if(v==="") return null
+
+let n=Number(v)
+
+if(isNaN(n)) return null
+
+return Math.max(0,Math.min(100,n))
+
+}
+
+function getStatus(total){
+
+if(total>=65){
+
+return{
+text:"You have passed this module! Congratulations!",
+className:"result-pass"
+}
+
+}
+
+return{
+text:"You can still achieve it. Good luck.",
+className:"result-fail"
+}
+
+}
+
+function calculate(){
+
+let grades=inputs.map(id=>getGrade(id))
+
+let filled=grades.filter(v=>v!==null)
+
+let result=document.getElementById("result")
+let status=document.getElementById("status")
+let note=document.getElementById("note")
+let card=document.getElementById("resultCard")
+
+card.classList.remove("result-pass","result-fail")
+
+if(filled.length===0){
+
+result.textContent="—"
+status.textContent="Ready when you are..."
+note.textContent="Enter your grades to see your result."
+
+return
+
+}
+
+let total=0
+
+for(let i=0;i<grades.length;i++){
+
+let g=grades[i]===null?0:grades[i]
+
+total+=g*(weights[i]/100)
+
+}
+
+result.textContent=total.toFixed(2)+"%"
+
+let state=getStatus(total)
+
+status.textContent=state.text
+
+note.textContent = total>=65
+? "Currently above the 65% pass threshold."
+: "Currently below the 65% pass threshold."
+
+card.classList.add(state.className)
+
+}
+
+function copyGrade(){
+
+let text=document.getElementById("result").textContent
+
+if(text==="—") return
+
+let value=text.replace("%","")
+
+navigator.clipboard.writeText(value)
+
+let btn=document.getElementById("copyBtn")
+
+btn.textContent="Copied grade!"
+
+setTimeout(()=>{
+btn.textContent="Copy"
+},1200)
+
+}
+
+inputs.forEach(id=>{
+document.getElementById(id).addEventListener("input",calculate)
+})
+
+</script>
+
+</body>
+</html>
