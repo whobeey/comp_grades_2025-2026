@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Calculator</title>
+
+<style>
+
+:root{
+--bg1:#0b1220;
+--bg2:#111827;
+--card:rgba(255,255,255,0.08);
+--text:#f8fafc;
+--muted:#cbd5e1;
+--soft:#94a3b8;
+--accent:#7c3aed;
+--accent2:#06b6d4;
+
+--btn-border:rgba(255,255,255,.10);
+--btn-bg:rgba(255,255,255,.05);
+--btn-hover:rgba(255,255,255,.10);
+
+--gold1:#fbbf24;
+--gold2:#f59e0b;
+--gold-text:#1f2937;
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+min-height:100vh;
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+color:var(--text);
+background:
+radial-gradient(circle at top left, rgba(124,58,237,.35), transparent 30%),
+radial-gradient(circle at top right, rgba(6,182,212,.25), transparent 30%),
+linear-gradient(135deg,var(--bg1),var(--bg2));
+display:flex;
+align-items:center;
+justify-content:center;
+padding:24px;
+}
+
+.card{
+width:100%;
+max-width:860px;
+background:var(--card);
+border:1px solid rgba(255,255,255,.10);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border-radius:24px;
+padding:32px;
+box-shadow:0 24px 70px rgba(0,0,0,.35);
+}
+
+.header{
+text-align:center;
+margin-bottom:28px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.08);
+color:var(--muted);
+font-size:.9rem;
+margin-bottom:14px;
+}
+
+h1{
+margin:0;
+font-size:clamp(2rem,4vw,3rem);
+font-weight:800;
+letter-spacing:-0.03em;
+line-height:1.2;
+}
+
+.subtitle{
+margin-top:12px;
+color:var(--muted);
+font-size:1rem;
+line-height:1.7;
+}
+
+.menu{
+display:grid;
+gap:16px;
+margin-top:24px;
+}
+
+.module-btn{
+display:block;
+width:100%;
+text-decoration:none;
+color:var(--text);
+padding:22px 24px;
+border-radius:20px;
+background:var(--btn-bg);
+border:1px solid var(--btn-border);
+transition:.2s ease;
+box-shadow:0 10px 30px rgba(0,0,0,.10);
+}
+
+.module-btn:hover{
+transform:translateY(-2px);
+background:var(--btn-hover);
+border-color:rgba(255,255,255,.18);
+}
+
+.module-code{
+font-size:1.1rem;
+font-weight:800;
+letter-spacing:-0.02em;
+margin-bottom:6px;
+}
+
+.module-name{
+font-size:.98rem;
+color:var(--muted);
+line-height:1.5;
+}
+
+.total-btn{
+padding:26px 28px;
+background:linear-gradient(135deg,var(--gold1),var(--gold2));
+border:1px solid rgba(255,255,255,.18);
+box-shadow:0 14px 34px rgba(245,158,11,.22);
+}
+
+.total-btn:hover{
+transform:translateY(-3px);
+filter:brightness(1.03);
+background:linear-gradient(135deg,var(--gold1),var(--gold2));
+}
+
+.total-btn .module-code,
+.total-btn .module-name{
+color:var(--gold-text);
+}
+
+.quote{
+margin-top:26px;
+text-align:center;
+color:#9ca3af;
+font-size:.92rem;
+line-height:1.6;
+font-style:italic;
+}
+
+@media (max-width:640px){
+.card{
+padding:22px;
+}
+
+.module-btn{
+padding:18px 18px;
+}
+
+.total-btn{
+padding:22px 20px;
+}
+}
+
+</style>
+</head>
+<body>
+
+<main class="card">
+
+<div class="header">
+<div class="badge">Foundation Computing</div>
+<h1>Grade Calculator for Foundation Computing Students.</h1>
+<p class="subtitle">
+Select a module below to open its calculator, or use the total grade page to work out your overall result.
+</p>
+</div>
+
+<section class="menu">
+
+<a class="module-btn" href="https://whobeey.github.io/comp_grades_2025-2026/FC723.html">
+<div class="module-code">FC723</div>
+<div class="module-name">Programming Theory</div>
+</a>
+
+<a class="module-btn" href="https://whobeey.github.io/comp_grades_2025-2026/FC724.html">
+<div class="module-code">FC724</div>
+<div class="module-name">Programming Practical</div>
+</a>
+
+<a class="module-btn" href="https://whobeey.github.io/comp_grades_2025-2026/FC703.html">
+<div class="module-code">FC703</div>
+<div class="module-name">Intermediate Mathematics</div>
+</a>
+
+<a class="module-btn" href="https://whobeey.github.io/comp_grades_2025-2026/FC701.html">
+<div class="module-code">FC701</div>
+<div class="module-name">Extended Project</div>
+</a>
+
+<a class="module-btn total-btn" href="https://whobeey.github.io/comp_grades_2025-2026/total.html">
+<div class="module-code">TOTAL GRADE</div>
+<div class="module-name">Overall Foundation Computing Result</div>
+</a>
+
+</section>
+
+<div class="quote">
+“Never regard study as a duty but as an enviable opportunity to learn” — Albert Einstein
+</div>
+
+</main>
+
+</body>
+</html>
